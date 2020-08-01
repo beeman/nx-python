@@ -18,6 +18,8 @@ import {
 } from '@nrwl/workspace';
 import { NxPythonSchematicSchema } from './schema';
 
+import { join, normalize } from 'path'
+
 /**
  * Depending on your needs, you can change this to either `Library` or `Application`
  */
@@ -67,17 +69,47 @@ export default function (options: NxPythonSchematicSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
     updateWorkspace((workspace) => {
-      workspace.projects
+      const appProjectRoot = normalizedOptions.projectRoot
+      const sourceRoot = `${appProjectRoot}/src`
+      const project = workspace.projects
         .add({
           name: normalizedOptions.projectName,
-          root: normalizedOptions.projectRoot,
-          sourceRoot: `${normalizedOptions.projectRoot}/src`,
+          root: appProjectRoot,
+          sourceRoot,
           projectType,
         })
-        .targets.add({
+
+        const options = {
+          outputPath: join(normalize('dist'), appProjectRoot),
+          main: join(project.sourceRoot,'hello.py'),
+        }
+
+        project.targets.add({
           name: 'build',
           builder: '@nx-python/nx-python:build',
-        });
+        })
+
+        project.targets.add({
+          name: 'serve',
+          builder: '@nx-python/nx-python:serve',
+          options: {
+            main: join(project.sourceRoot,'hello.py'),
+          },
+        })
+
+        project.targets.add({
+          name: 'test',
+          builder: '@nx-python/nx-python:test',
+          options: {
+            main: join(project.sourceRoot,'test_hello.py'),
+          },
+        })
+
+        project.targets.add({
+          name: 'lint',
+          builder: '@nx-python/nx-python:lint',
+        })
+
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
       tags: normalizedOptions.parsedTags,
