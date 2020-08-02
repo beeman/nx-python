@@ -4,9 +4,10 @@
   "version": "0.0.1",
   "schematics": {
     "nx-python": {
+      "aliases": ["app"],
       "factory": "./src/schematics/nx-python/schematic",
       "schema": "./src/schematics/nx-python/schema.json",
-      "description": "nx-python schematic"
+      "description": "Creates a new Python Application"
     }
   }
 }

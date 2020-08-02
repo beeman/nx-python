@@ -11,8 +11,17 @@ describe('nx-python e2e', () => {
     ensureNxProject('@nx-python/nx-python', 'dist/packages/nx-python');
     await runNxCommandAsync(`generate @nx-python/nx-python:nxPython ${plugin}`);
 
-    const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain('Builder ran');
+    const resultBuild = await runNxCommandAsync(`build ${plugin}`)
+    expect(resultBuild.stdout).toContain(`Executing command: python -m py_compile`)
+
+    const resultLint = await runNxCommandAsync(`lint ${plugin}`)
+    expect(resultLint.stdout).toContain(`Executing command: python -m flake8 apps/${plugin}/**/*.py`)
+
+    const resultServe = await runNxCommandAsync(`serve ${plugin}`)
+    expect(resultServe.stdout).toContain(`Executing command: python`)
+
+    const resultTest = await runNxCommandAsync(`test ${plugin}`)
+    expect(resultTest.stdout).toContain(`Executing command: python -m unittest discover -s ./ -p apps/${plugin}/**/*.py`)
 
     done();
   });
@@ -25,7 +34,7 @@ describe('nx-python e2e', () => {
         `generate @nx-python/nx-python:nxPython ${plugin} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
+        checkFilesExist(`libs/subdir/${plugin}/src/hello.py`)
       ).not.toThrow();
       done();
     });

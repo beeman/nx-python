@@ -23,7 +23,8 @@ import { join, normalize } from 'path'
 /**
  * Depending on your needs, you can change this to either `Library` or `Application`
  */
-const projectType = ProjectType.Library;
+//const projectType = ProjectType.Library;
+const projectType = ProjectType.Application;
 
 interface NormalizedSchema extends NxPythonSchematicSchema {
   projectName: string;
@@ -87,6 +88,7 @@ export default function (options: NxPythonSchematicSchema): Rule {
         project.targets.add({
           name: 'build',
           builder: '@nx-python/nx-python:build',
+          options
         })
 
         project.targets.add({
@@ -108,6 +110,9 @@ export default function (options: NxPythonSchematicSchema): Rule {
         project.targets.add({
           name: 'lint',
           builder: '@nx-python/nx-python:lint',
+          options: {
+            main: join(project.sourceRoot,'hello.py'),
+          },
         })
 
     }),
