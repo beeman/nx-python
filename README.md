@@ -4,7 +4,7 @@ This project was generated using [Nx](https://nx.dev).
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="250">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/240px-Python-logo-notext.svg.png" width="250"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/240px-Python-logo-notext.svg.png" width="200"/>
 </p>
 
 The `nx-python` plugin allows user to create a basic python application using `nx` commands. To add the plugin to your project, just follow the next steps 
@@ -13,7 +13,7 @@ The `nx-python` plugin allows user to create a basic python application using `n
 
 ### Create a Nx Workspace
 
-Before installing the `nx-python` plugin, it is required to have a Nx Workspace pre-configured. If you don't, the proceed to create a new one executing the next command:
+Before installing the `nx-python` plugin, it is required to have a Nx Workspace pre-configured. If you don't, then proceed to create a new one executing the next command:
 
 ```
 npx create-nx-workspace python-workspace --preset=empty --cli=nx --nx-cloud true
