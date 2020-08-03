@@ -9,19 +9,19 @@ describe('nx-python e2e', () => {
   it('should create nx-python', async (done) => {
     const plugin = uniq('nx-python');
     ensureNxProject('@nx-python/nx-python', 'dist/packages/nx-python');
-    await runNxCommandAsync(`generate @nx-python/nx-python:nxPython ${plugin}`);
+    await runNxCommandAsync(`generate @nx-python/nx-python:app ${plugin}`);
 
     const resultBuild = await runNxCommandAsync(`build ${plugin}`)
-    expect(resultBuild.stdout).toContain(`Executing command: python -m py_compile`)
+    expect(resultBuild.stdout).toContain(`Executing command: python3 -m py_compile`)
 
     const resultLint = await runNxCommandAsync(`lint ${plugin}`)
-    expect(resultLint.stdout).toContain(`Executing command: python -m flake8 apps/${plugin}/**/*.py`)
+    expect(resultLint.stdout).toContain(`Executing command: python3 -m flake8 apps/${plugin}/src/*.py`)
 
     const resultServe = await runNxCommandAsync(`serve ${plugin}`)
-    expect(resultServe.stdout).toContain(`Executing command: python`)
+    expect(resultServe.stdout).toContain(`Executing command: python3`)
 
     const resultTest = await runNxCommandAsync(`test ${plugin}`)
-    expect(resultTest.stdout).toContain(`Executing command: python -m unittest discover -s ./ -p apps/${plugin}/**/*.py`)
+    expect(resultTest.stdout).toContain(`Executing command: python3 -m unittest discover -s ./ -p apps/${plugin}/src/*test*.py`)
 
     done();
   });
@@ -31,10 +31,10 @@ describe('nx-python e2e', () => {
       const plugin = uniq('nx-python');
       ensureNxProject('@nx-python/nx-python', 'dist/packages/nx-python');
       await runNxCommandAsync(
-        `generate @nx-python/nx-python:nxPython ${plugin} --directory subdir`
+        `generate @nx-python/nx-python:app ${plugin} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/hello.py`)
+        checkFilesExist(`apps/subdir/${plugin}/src/hello.py`)
       ).not.toThrow();
       done();
     });
@@ -45,7 +45,7 @@ describe('nx-python e2e', () => {
       const plugin = uniq('nx-python');
       ensureNxProject('@nx-python/nx-python', 'dist/packages/nx-python');
       await runNxCommandAsync(
-        `generate @nx-python/nx-python:nxPython ${plugin} --tags e2etag,e2ePackage`
+        `generate @nx-python/nx-python:app ${plugin} --tags e2etag,e2ePackage`
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);

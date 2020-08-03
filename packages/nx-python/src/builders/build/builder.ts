@@ -17,7 +17,7 @@ export function runBuilder(
       const mainFile = `${options.main}`
       const output = `${options.outputPath}`
       //Compile files using the native py_compile module
-      return runPythonCommand(context, '-m py_compile', [output, mainFile])
+      return runPythonCommand(context, 'build', [mainFile])
     })
   );
 }

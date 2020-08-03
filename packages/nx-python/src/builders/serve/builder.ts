@@ -9,7 +9,7 @@ export function runBuilder(options: ServeBuilderSchema, context: BuilderContext)
     map(() => {
       const mainFile = `${options.main}`
 
-      return runPythonCommand(context, '', [mainFile])
+      return runPythonCommand(context, 'serve', [mainFile])
     }),
   )
 }

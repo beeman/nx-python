@@ -26,6 +26,7 @@ describe('Command Runner Builder', () => {
     // A "run" can have multiple outputs, and contains progress information.
     const run = await architect.scheduleBuilder('@nx-python/nx-python:serve', options)
     // The "result" member (of type BuilderOutput) is the next output.
+
     const output = await run.result
 
     // Stop the builder from running. This stops Architect from keeping

@@ -3,6 +3,7 @@ class HelloFactory:
         for key, value in args.items():
             setattr(self, key, 'Hello {}'.format(value))
 
+
 if __name__ == '__main__':
     hello = HelloFactory(application="<%= projectName %>", user="Human")
     print(hello.application)

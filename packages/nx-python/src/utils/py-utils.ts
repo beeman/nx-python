@@ -3,16 +3,29 @@ import { execSync } from 'child_process'
 
 export function runPythonCommand(
   context: BuilderContext,
-  command: '-m py_compile' | '-m flake8' | '' | '-m unittest discover -s ./ -p',
+  command: 'build' | 'lint' | 'serve' | 'test',
   params: string[],
   options: { cwd?: string; cmd?: string } = {},
 ): { success: boolean } {
   // Take the parameters or set defaults
-  const cmd = options.cmd || 'python'
+  const cmd = options.cmd || 'python3'
   const cwd = options.cwd || process.cwd()
 
+  let mutate_command = ""
+
   // Create the command to execute
-  const execute = `${cmd} ${command} ${params.join(' ')}`
+  if(command=="serve")
+    mutate_command = ""
+  else if(command=="build")
+    mutate_command = "-m py_compile"
+  else if(command=="lint")
+    mutate_command = "-m flake8"
+  else if(command=="test")
+    mutate_command = "-m unittest discover -s ./ -p"
+  else
+    mutate_command = command
+    
+  const execute = `${cmd} ${mutate_command} ${params.join(' ')}`
 
   try {
     context.logger.info(`Executing command: ${execute}`)
