@@ -1,90 +1,86 @@
-# NxPython
+# NxPython plugin
 
 This project was generated using [Nx](https://nx.dev).
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="250">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/240px-Python-logo-notext.svg.png" width="250"/>
+</p>
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+The `nx-python` plugin allows user to create a basic python application using `nx` commands. To add the plugin to your project, just follow the next steps 
 
-## Adding capabilities to your workspace
+## Getting started
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### Create a Nx Workspace
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+Before installing the `nx-python` plugin, it is required to have a Nx Workspace pre-configured. If you don't, the proceed to create a new one executing the next command:
 
-Below are our core plugins:
+```
+npx create-nx-workspace python-workspace --preset=empty --cli=nx --nx-cloud true
+cd python-workspace
+```
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+### Install the `nx-python` plugin
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+```
+yarn add -D @nx-python/nx-python
+```
 
-## Generate an application
+### Adding an application to our workspace
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+To create a new python application based on plugin, please execute the next command:
 
-> You can use any of the plugins above to generate applications as well.
+```
+nx g @nx-python/nx-python:app <app-name>
+```
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+**Note:** Replace `<app-name>` with the name of your new application
 
-## Generate a library
+## Usage
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+After creating the `<app-name>` application using the `nx-python` plugin. We can execute the build, lint, test and serve `nx commands` on this new application. Output will be stored on `dist/<app-name>/` directory.
 
-> You can also use any of the plugins above to generate libraries as well.
+### Building the app
 
-Libraries are sharable across libraries and applications. They can be imported from `@nx-python/mylib`.
+The `build` command is going to compile all the python files inside `<app-name>` directory, using the `py_compile` native module. 
 
-## Development server
+```
+nx build <app-name>
+```
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+More information here: [py_compule](https://docs.python.org/3/library/py_compile.html)
 
-## Code scaffolding
+### Linting the application
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+For the purpose of linting, sadly python doesn't have a native module. `nx-python` will use the `Flake8` module to lint your application, but it is required to install this one first. More info here: [Flake8](https://flake8.pycqa.org/en/latest/)
 
-## Build
+```
+pip install Flake8
+```
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+After that you can perform the lint process with:
 
-## Running unit tests
+```
+nx lint <app-name>
+```
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+### Serving the application
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+This is going to execute the main file in your python application.
 
-## Running end-to-end tests
+```
+nx serve <app-name>
+```
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+### Testing your application
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+The `test` command is going to execute all the test units inside your python app. You can add new test unit files if you want, but there are two requirements that you must meet:
 
-## Understand your workspace
+- The filename must include the prefix `test`
+- Because we are using the native `unittest` python module to make our tests, you are going to create the tests based on this approach. More info here: [unittest](https://docs.python.org/3/library/unittest.html)
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+To test your python app, execute the command:
 
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-## ☁ Nx Cloud
-
-### Computation Memoization in the Cloud
-
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+```
+nx test <app-name>
+```
