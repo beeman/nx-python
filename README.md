@@ -86,4 +86,4 @@ nx test <app-name>
 ```
 ## Contributing
 
-All contributions are welcome. Make sure you follow the [code of conduct](CODE_OF_CONDUCT.MD) in this repository. 
+🐍 All contributions are welcome. Make sure you follow the [code of conduct](CODE_OF_CONDUCT.MD) in this repository. 
