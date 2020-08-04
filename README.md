@@ -23,7 +23,7 @@ cd python-workspace
 ### Install the `nx-python` plugin
 
 ```
-yarn add -D nx-python
+yarn add -D @nx-python/nx-python
 ```
 
 ### Adding an application to our workspace
@@ -31,7 +31,7 @@ yarn add -D nx-python
 To create a new python application based on this plugin, please execute the following command:
 
 ```
-nx g nx-python:app <app-name>
+nx g @nx-python/nx-python:app <app-name>
 ```
 
 **Note:** Replace `<app-name>` with the name of your new application
