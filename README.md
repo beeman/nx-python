@@ -1,4 +1,4 @@
-# NxPython plugin
+# 🐍 NxPy: Nx Python plugin
 
 This project was generated using [Nx](https://nx.dev).
 
@@ -7,13 +7,13 @@ This project was generated using [Nx](https://nx.dev).
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/240px-Python-logo-notext.svg.png" width="170"/>
 </p>
 
-The `nx-python` plugin allows user to create a basic python application using `nx` commands. To add the plugin to your project, just follow the next steps 
+The `nx-python` plugin allows users to create a basic python application using `nx` commands. To add the plugin to your project, just follow these steps: 
 
 ## Getting started
 
 ### Create a Nx Workspace
 
-Before installing the `nx-python` plugin, it is required to have a Nx Workspace pre-configured. If you don't, then proceed to create a new one executing the next command:
+Before installing the `nx-python` plugin, it is required to have a pre-configured Nx Workspace . If you don't, then proceed to create a new one executing the following command:
 
 ```
 npx create-nx-workspace python-workspace --preset=empty --cli=nx --nx-cloud true
@@ -28,7 +28,7 @@ yarn add -D @nx-python/nx-python
 
 ### Adding an application to our workspace
 
-To create a new python application based on plugin, please execute the next command:
+To create a new python application based on this plugin, please execute the following command:
 
 ```
 nx g @nx-python/nx-python:app <app-name>
@@ -48,11 +48,11 @@ The `build` command is going to compile all the python files inside `<app-name>`
 nx build <app-name>
 ```
 
-More information here: [py_compule](https://docs.python.org/3/library/py_compile.html)
+More information here: [py_compile](https://docs.python.org/3/library/py_compile.html)
 
 ### Linting the application
 
-For the purpose of linting, sadly python doesn't have a native module. `nx-python` will use the `Flake8` module to lint your application, but it is required to install this one first. More info here: [Flake8](https://flake8.pycqa.org/en/latest/)
+Unfortunately Python doesn't have a native linting module(yet!). `nx-python` uses the `Flake8` module to lint your application. It is required that you install this module beforehand. More info here: [Flake8](https://flake8.pycqa.org/en/latest/)
 
 ```
 pip install Flake8
@@ -84,3 +84,6 @@ To test your python app, execute the command:
 ```
 nx test <app-name>
 ```
+## Contributing
+
+All contributions are welcome. Make sure you follow the [code of conduct](CODE_OF_CONDUCT.MD) in this repository. 
