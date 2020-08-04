@@ -23,7 +23,7 @@ cd python-workspace
 ### Install the `nx-python` plugin
 
 ```
-yarn add -D @nx-python/nx-python
+yarn add -D nx-python
 ```
 
 ### Adding an application to our workspace
